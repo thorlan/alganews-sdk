@@ -10,12 +10,16 @@ class PaymentService extends Service {
         return this.Http.get<Payment.Paginated>('/payments'.concat(queryString)).then(this.getData);
     }
 
+    static getPayment(paymentId: number) {
+        return this.Http.get<Payment.Detailed>(`/payments/${paymentId}`).then(this.getData);
+    }
+
     static addPayment(payment: Payment.Input){
         return this.Http.post<Payment.Detailed>('/payments',payment).then(this.getData);
     }
 
-    static approvePayments(payments: number[]){
-        return this.Http.put<string>('/payments/bulk-approvals',payments).then(this.getData);
+    static approvePayments(paymentsId: number[]){
+        return this.Http.put<string>('/payments/bulk-approvals',paymentsId).then(this.getData);
     }
 
     static addPaymentPreview(payment: Payment.PreviewInput){
@@ -26,9 +30,6 @@ class PaymentService extends Service {
         return this.Http.put<string>(`/payments/${paymentId}/approval`).then(this.getData);
     }
 
-    static getPayment(paymentId: number) {
-        return this.Http.get<Payment.Detailed>(`/payments/${paymentId}`).then(this.getData);
-    }
 
     static getPostPayment(paymentId: number) {
         return this.Http.get<Payment.PostWithEarnings>(`/payments/${paymentId}/posts`).then(this.getData);
