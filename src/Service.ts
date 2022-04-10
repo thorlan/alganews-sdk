@@ -10,7 +10,7 @@ class Service {
 
     public static setRequestInterceptors(
         onFulFilled: (request: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
-        onRejected: (error: any) => any
+        onRejected?: (error: any) => any
     ) {
         Http.interceptors.request.use(onFulFilled, onRejected)
     }
