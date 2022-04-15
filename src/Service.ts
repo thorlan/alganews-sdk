@@ -5,8 +5,13 @@ import handleAxiosResponseSuccess from './utils/handleAxiosReponseSuccess';
 const Http = axios.create();
 
 class Service {
+
     protected static Http = Http;
     protected static getData = getData
+
+    public static setBaseUrl(baseUrl: string) {
+        this.Http.defaults.baseURL = baseUrl;
+    }
 
     public static setRequestInterceptors(
         onFulFilled: (request: AxiosRequestConfig) => AxiosRequestConfig | Promise<AxiosRequestConfig>,
